@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de Pruebas AquaBuddy</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h1>Panel de Pruebas AquaBuddy</h1>
+
+      <!-- Conexión a la Base de Datos -->
+      <section class="group">
+        <h2>Conexión a la Base de Datos</h2>
+        <p>Comprueba que se pueda acceder a las BD.</p>
+        <a class="btn" href="testdb" target="resultado">Probar Conexión</a>
+      </section>
+
+      <!-- Progreso Diario -->
+      <section class="group">
+        <h2>Progreso Diario</h2>
+        <form action="progressPercent" method="get" target="resultado">
+          <label>ID Usuario:</label>
+          <input type="number" name="usuarioId" required>
+          <button type="submit">Ver % Consumido Hoy</button>
+        </form>
+      </section>
+
+      <!-- Gestión de Usuarios -->
+      <section class="group">
+        <h2>Gestión de Usuarios</h2>
+        <!-- Login -->
+        <fieldset>
+          <legend>Login (prueba de autenticación)</legend>
+          <form action="login" method="post" target="resultado">
+            <label>Email:</label><input type="email" name="email" required/>
+            <label>Contraseña:</label><input type="password" name="password" required/>
+            <button type="submit">Iniciar Sesión</button>
+          </form>
+        </fieldset>
+        <!-- Listar Usuarios -->
+        <fieldset>
+          <legend>Listar Usuarios</legend>
+          <form action="listUsers" method="get" target="resultado">
+            <label>ID Usuario (opcional):</label>
+            <input type="number" name="id" placeholder="vacío = todos"/>
+            <button type="submit">Listar Usuarios</button>
+          </form>
+        </fieldset>
+        <!-- Crear Usuario -->
+        <fieldset>  
+          <legend>Crear un nuevo usuario</legend>
+          <form action="addUser" method="post" target="resultado">
+            <label>Nombre:</label><input type="text" name="nombre" required/>
+            <label>Apellidos:</label><input type="text" name="apellidos" required/>
+            <label>Email:</label><input type="email" name="email" required/>
+            <label>Contraseña:</label><input type="password" name="password" required/>
+            <label>Peso (kg):</label><input name="peso" type="number" step="0.1" required/>
+            <label>Altura (cm):</label><input name="altura" type="number" step="0.1" required/>
+            <label>Nivel de Actividad:</label>
+            <select name="nivelActividad" required>
+              <option value="bajo">Bajo</option>
+              <option value="medio" selected>Medio</option>
+              <option value="alto">Alto</option>
+            </select>
+            <label>Objetivo Diario (ml):</label><input name="objetivoMl" type="number" required/>
+            <button type="submit">Crear Usuario</button>
+          </form>
+        </fieldset>
+        <!-- Editar Usuario -->
+        <fieldset>
+          <legend>Editar usuario existente</legend>
+          <form action="updateUser" method="post" target="resultado">
+            <label>ID Usuario:</label><input type="number" name="id" required/>
+            <label>Nombre:</label><input type="text" name="nombre" required/>
+            <label>Apellidos:</label><input type="text" name="apellidos" required/>
+            <label>Email:</label><input type="email" name="email" required/>
+            <label>Contraseña (opcional):</label><input type="password" name="password"/>
+            <label>Peso (kg):</label><input name="peso" type="number" step="0.1" required/>
+            <label>Altura (cm):</label><input name="altura" type="number" step="0.1" required/>
+            <label>Nivel de Actividad:</label>
+            <select name="nivelActividad" required>
+              <option value="bajo">Bajo</option>
+              <option value="medio">Medio</option>
+              <option value="alto">Alto</option>
+            </select>
+            <label>Objetivo Diario (ml):</label><input name="objetivoMl" type="number" required/>
+            <button type="submit">Actualizar Usuario</button>
+          </form>
+        </fieldset>
+        <!-- Eliminar Usuario -->
+        <fieldset>
+          <legend>Eliminar usuario</legend>
+          <form action="deleteUser" method="post" target="resultado">
+            <label>ID Usuario:</label><input type="number" name="id" required/>
+            <button type="submit">Borrar Usuario</button>
+          </form>
+        </fieldset>
+      </section>
+
+      <!-- Gestión de Consumos -->
+      <section class="group">
+        <h2>Gestión de Consumos de Agua</h2>
+        <fieldset>
+          <legend>Listar Consumos</legend>
+          <form action="listConsumos" method="get" target="resultado">
+            <label>ID Usuario (opcional):</label>
+            <input type="number" name="usuarioId" placeholder="vacío = todos"/>
+            <button type="submit">Listar Consumos</button>
+          </form>
+        </fieldset>
+        <fieldset>
+          <legend>Añadir Consumo</legend>
+          <form action="addConsumo" method="post" target="resultado">
+            <label>ID Usuario:</label><input type="number" name="usuarioId" required/>
+            <label>Cantidad (ml):</label><input type="number" name="cantidadMl" required/>
+            <button type="submit">Añadir Consumo</button>
+          </form>
+        </fieldset>
+        <fieldset>
+          <legend>Editar Consumo</legend>
+          <form action="updateConsumo" method="post" target="resultado">
+            <label>ID Consumo:</label><input type="number" name="id" required/>
+            <label>Nueva Cantidad (ml):</label><input type="number" name="cantidadMl" required/>
+            <button type="submit">Actualizar Consumo</button>
+          </form>
+        </fieldset>
+        <fieldset>
+          <legend>Borrar Consumo</legend>
+          <form action="deleteConsumo" method="post" target="resultado">
+            <label>ID Consumo:</label><input type="number" name="id" required/>
+            <button type="submit">Borrar Consumo</button>
+          </form>
+        </fieldset>
+      </section>
+
+      <!-- Gestión de Recordatorios -->
+      <section class="group">
+        <h2>Gestión de Recordatorios</h2>
+        <fieldset>
+          <legend>Listar Recordatorios</legend>
+          <form action="listRecordatorios" method="get" target="resultado">
+            <label>ID Usuario (opcional):</label>
+            <input type="number" name="usuarioId" placeholder="vacío = todos"/>
+            <button type="submit">Listar Recordatorios</button>
+          </form>
+        </fieldset>
+        <fieldset>
+          <legend>Añadir Recordatorio</legend>
+          <form action="addRecordatorio" method="post" target="resultado">
+            <label>ID Usuario:</label><input type="number" name="usuarioId" required/>
+            <label>Intervalo (min):</label><input type="number" name="intervaloMin" required/>
+            <button type="submit">Añadir Recordatorio</button>
+          </form>
+        </fieldset>
+        <fieldset>
+          <legend>Editar Recordatorio</legend>
+          <form action="updateRecordatorio" method="post" target="resultado">
+            <label>ID Recordatorio:</label><input type="number" name="id" required/>
+            <label>Activo:</label>
+            <select name="activo">
+              <option value="true">Activo</option>
+              <option value="false">Inactivo</option>
+            </select>
+            <button type="submit">Actualizar Recordatorio</button>
+          </form>
+        </fieldset>
+        <fieldset>
+          <legend>Borrar Recordatorio</legend>
+          <form action="deleteRecordatorio" method="post" target="resultado">
+            <label>ID Recordatorio:</label><input type="number" name="id" required/>
+            <button type="submit">Borrar Recordatorio</button>
+          </form>
+        </fieldset>
+      </section>
+
+    </aside>
+
+    <main class="main">
+      <iframe name="resultado" frameborder="0"></iframe>
+    </main>
+  </div>
+</body>
+</html>
